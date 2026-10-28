@@ -1,0 +1,16 @@
+{
+  "acceptance_case_pass": false,
+  "evidence_limit": "Real GitHub orchestration/native approval mechanism only; synthetic artifact/deployment data is not a real application or artifact deployment. No F31, immutable-artifact or deploy-only rollback qualification.",
+  "network_actions_performed": [],
+  "repository": "helloangular/helio-owner-227-20261028",
+  "workflows": [
+    {
+      "path": ".github/workflows/owner-227-managed.yml",
+      "sha256": "1bfd0c2473a0459f463d751847a42dcb51ec4a7669d25a1888a5197894a7968b"
+    },
+    {
+      "path": ".github/workflows/owner-227-provider.yml",
+      "sha256": "ece899d1ce7f467e86cb4b5616ea33ee7bf2ffa2abe90e8f456df7669d36af9e"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+# Owned TC128 negative-admission fixture; dispatch is not authorized.
+name: owner-227-a3-tc128-protection
+run-name: ${{ inputs.helio_execution_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        required: false
+        default: owner-227-a3-tc128-self-review
+        options: [owner-227-a3-tc128-self-review]
+      helio_execution_id:
+        type: string
+        required: true
+      helio_release_id:
+        type: string
+        required: false
+        default: ''
+      helio_stage_id:
+        type: string
+        required: false
+        default: ''
+      workflow_revision:
+        type: string
+        required: false
+        default: ''
+      release_version:
+        type: string
+        required: false
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: owner-227-a3-tc128-${{ inputs.helio_execution_id || github.run_id }}
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: owner-227-a3-tc128-self-review
+    steps:
+      - name: Owned static fixture boundary
+        shell: bash
+        run: echo 'Owned TC128 synthetic fixture; no application deployment.'

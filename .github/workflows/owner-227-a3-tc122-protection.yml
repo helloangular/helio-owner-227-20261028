@@ -1,0 +1,53 @@
+# Owned TC122 negative-admission fixture; dispatch is not authorized.
+name: owner-227-a3-tc122-protection
+run-name: ${{ inputs.helio_execution_id }}
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        required: false
+        default: owner-227-a3-tc122-production
+        options: [owner-227-a3-tc122-production, owner-227-a3-tc122-test]
+      helio_execution_id:
+        type: string
+        required: true
+      helio_release_id:
+        type: string
+        required: false
+        default: ''
+      helio_stage_id:
+        type: string
+        required: false
+        default: ''
+      workflow_revision:
+        type: string
+        required: false
+        default: ''
+      release_version:
+        type: string
+        required: false
+        default: ''
+permissions:
+  contents: read
+concurrency:
+  group: owner-227-a3-tc122-${{ inputs.helio_execution_id || github.run_id }}
+  cancel-in-progress: false
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: owner-227-a3-tc122-test
+    steps:
+      - name: Owned test boundary
+        shell: bash
+        run: echo 'Owned TC122 prerequisite; no deployment.'
+  production:
+    needs: [test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    environment: owner-227-a3-tc122-production
+    steps:
+      - name: Owned production boundary
+        shell: bash
+        run: echo 'Owned TC122 prerequisite; no deployment.'
